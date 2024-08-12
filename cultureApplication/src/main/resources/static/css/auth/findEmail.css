@@ -1,0 +1,141 @@
+body {
+    background-color: #f4f4f4;
+}
+.header{
+    padding-top:100px;
+    text-align: center;
+}
+.header h1 {
+    font-family: "Playwrite NZ", cursive;
+    font-weight: bold;
+    font-optical-sizing: auto;
+    font-size:35px;
+    font-style: normal;
+    margin-bottom: 50px;
+    color:#453fb2;
+}
+.description{
+    color:#333333;
+    opacity: 0.8;
+    font-size: 15px;
+}
+.wrapper{
+    width:400px;
+    margin:0 auto;
+    padding:30px 0;
+}
+.form-description{
+    font-size:23px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.title{
+    font-family: "Playwrite NZ", cursive;
+    font-weight: bold;
+    font-optical-sizing: auto;
+    font-size:35px;
+    font-style: normal;
+    text-align: center;
+    margin-bottom: 50px;
+    color:#453fb2;
+}
+.find-email-form{
+    background-color: white;
+    padding:30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 8px #3333;
+}
+.find-email-form input{
+    display:block;
+    height:45px;
+    padding:10px 10px;
+    border:1px solid #c4c4c4;
+    border-radius: 8px;
+    background-color:#fff;
+    color:#333;
+    font-size: 15px;
+    font-weight:bold;
+    font-family: "Noto Sans KR", sans-serif;
+    box-sizing:border-box;
+    width:100%;
+    margin:10px 0;
+}
+.find-email-form input:focus{
+    border-color: #453fb2;
+    border-width: 1px;
+    outline: none;
+}
+.find-email-button-container{
+    margin:20px 0;
+}
+#find-email-button{
+    width:100%;
+    margin:0 auto;
+    text-align: center;
+    font-size:15px;
+    font-weight: 600;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 8px;
+    background-color: #453fb2;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+#find-email-button:hover{
+    transform: scale(1.1);
+}
+.link-container{
+    margin-top:30px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.link-container a {
+    text-align: center;
+    color:#333;
+    font-size:13px;
+    font-weight: bold;
+    margin:0 15px;
+    text-decoration: none;
+}
+.link-container a:hover{
+    color:#453fb2;
+}
+.link-container span{
+    opacity: 0.5;
+}
+.no-email-message, .email-message{
+    margin:20px 0;
+    color:red;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+.email-message{
+    color:#453fb2;
+    margin-bottom: 10px !important;
+}
+.email-list{
+    padding:0;
+}
+.target-email{
+    text-align: center;
+    list-style: none;
+    font-weight: bold;
+    font-size:15px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animation-tag {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}

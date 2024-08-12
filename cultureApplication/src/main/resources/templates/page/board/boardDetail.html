@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <style>
+        .ck-content {
+            color:#333;
+            font-size: 13px;
+            font-weight:bold;
+            font-family: "Noto Sans KR", sans-serif;
+            min-height:100px;
+        }
+    </style>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/board/boardDetail.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> Pet Q&A <i class="fa-solid fa-chevron-right"></i> <span th:text="${result.post.title}"></span></p>
+    </div>
+    <div class="sub-header">
+        <h1 th:text="${result.post.title}"></h1>
+        <p>
+            해당 게시물에서 궁금한거나 답변을 댓글을 통해 달아주세요! <br>
+            댓글 작성은 반드시 로그인이 필요합니다.
+        </p>
+    </div>
+    <div class="post-container">
+        <h1 th:text="${result.post.title}"></h1>
+        <div class="info-container">
+            <div class="author-container">
+                <p><i class="fa-solid fa-user"></i> <span th:text="${result.author}"></span>님</p>
+                <p><i class="fa-regular fa-calendar-check"></i> <span th:text="${#strings.setSplit(result.post.createdDateTime,'T')[0]}"></span></p>
+            </div>
+            <div class="view-comment-container">
+                <p class="view"><span th:text="${result.post.totalCount}"></span> view</p>
+                <p class="divide">|</p>
+                <p class="comment"><span th:text="${commentLength}"></span> comment</p>
+            </div>
+        </div>
+        <div class="content-wrapper"><p class="content" th:utext="${result.post.content}"></p></div>
+        <th:block th:if="${(userId != null) && (userId == result.post.member.id) }">
+            <div class="button-container">
+                <button class="edit-button">
+                    <a th:href="@{/private/board/edit/{postId}(postId=${result.post.id})}">
+                        <i class="fa-solid fa-pen-to-square"></i> 수정
+                    </a>
+                </button>
+                <button class="delete-button"><i class="fa-solid fa-trash-can"></i> 삭제</button>
+            </div>
+        </th:block>
+        <th:block th:if="${#strings.equals(role, 'ADMIN')}">
+            <div class="button-container" style="text-align: center;">
+                <button id="admin-delete-button" class="delete-button"><i class="fa-solid fa-trash-can"></i> 관리자 용 삭제</button>
+            </div>
+        </th:block>
+    </div>
+    <div th:class="comment-container">
+        <div class="view-comment-wrapper">
+            <p class="view-count">
+                <i class="fa-solid fa-eye count-icon"></i>
+                <span th:text="${result.post.totalCount}"></span> view
+            </p>
+            <p class="comment-count">
+                <i class="fa-solid fa-message count-icon"></i>
+                <span th:text="${commentLength}"></span> comment
+            </p>
+        </div>
+        <div class="public-comment">
+            <div th:if="${commentLength == 0}">
+                <p class="no-comment-message" >아직 등록된 댓글이 없습니다.</p>
+            </div>
+            <div class="comment-list-wrapper">
+                <div th:each="result : ${comment}">
+                    <div class="modal fade" th:id="'edit-modal'+${result.id}" tabindex="-1" aria-labelledby="address-modal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body edit-comment-wrapper">
+                                    <h4 class="edit-title">댓글 내용은 변경해주세요!</h4>
+                                    <label>
+                                        <textarea
+                                            placeholder="Comment..."
+                                            data-value="0"
+                                            th:id="'editor'+${result.id}"
+                                            th:text="${result.content}">
+                                        </textarea>
+                                    </label>
+                                    <div class="edit-button-container">
+                                        <button type="button"
+                                            th:onclick="'resetEditEditor(' + ${result.id} + ')'"
+                                            class="reset-edit-comment"><i class="fa-solid fa-trash-can"></i> Reset</button>
+                                        <button
+                                            th:onclick="'editCommentSubmit(' + ${result.id} + ')'"
+                                            type="button" class="edit-comment-button"><i class="fa-solid fa-pen-to-square"></i> Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-dog icon"></i>
+                    </div>
+                    <div class="wrapper">
+                        <div class="comment-author">
+                            <div class="triangle"></div>
+                            <div class="author-info">
+                                <p class="author" th:text="${result.member.name}+'님'"></p>
+                                <p class="email" th:text="${result.member.email}"></p>
+                                <p class="date">
+                                    commented<span th:text="${#strings.setSplit(result.createdDateTime,'T')[0]}"></span>
+                                </p>
+                                <th:block th:if="${(userId != null) && (userId == result.member.id) }">
+                                    <div class="edit">
+                                        <p
+                                            data-bs-toggle="modal"
+                                            th:attr="data-bs-target='#edit-modal'+${result.id}"
+                                            th:onclick="'initializeEditor(this,'+${result.id}+')'"
+                                            th:data="${result.content}"
+                                            class="comment-edit">변경</p>
+                                        <p th:onclick="'deleteComment(' + ${result.id} + ')'"
+                                           class="comment-delete">삭제</p>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="comment-text">
+                            <p class="text" th:utext="${result.content}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div sec:authorize="isAnonymous()" class="no-login-comment">
+            <p class="no-message">댓글을 달기 위해서는 로그인이 필요합니다.</p>
+            <button class="login-button">
+                <a th:href="@{/auth/login}">
+                    <i class="fa-solid fa-location-arrow"></i> 로그인하기
+                </a>
+            </button>
+        </div>
+        <div sec:authorize="isAuthenticated()" class="login-comment">
+            <div class="comment-write-container">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-dog icon"></i>
+                </div>
+                <div class="text-wrapper">
+                    <div class="triangle"></div>
+                    <form class="post-form" method="post">
+                        <label for="editor" hidden="hidden" class="editor">Comment Content</label>
+                        <textarea class="form-control content" id="editor" placeholder="Comment..."></textarea>
+                    </form>
+                    <div class="comment-button-container">
+                        <button type="button" class="reset-button"><i class="fa-solid fa-trash-can"></i> Reset</button>
+                        <button type="submit" class="comment-button"><i class="fa-solid fa-pen-to-square"></i> Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const postId = [[ ${ result.post.id } ]];
+        </script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <script th:src="@{/js/board/boardDetail.js}"></script>
+        <script th:src="@{/js/api/postApi.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

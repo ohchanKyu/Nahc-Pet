@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/board/board.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> Pet Q&A <i class="fa-solid fa-chevron-right"></i> 전체 게시물 </p>
+    </div>
+    <div class="sub-header">
+        <h1>Pet Q&A</h1>
+        <p>
+            궁금한 것이나 질문사항들을 Pet Q&A 게시판에 등록해보세요! <br>
+            댓글을 통해 서로 소통할 수 있습니다.
+        </p>
+        <div class="select-bar">
+            <th:block sec:authorize="isAuthenticated()">
+                <a class="not-active" th:href="@{/private/board/me}">내 게시물</a>
+            </th:block>
+            <a class="not-active" id="all" th:href="@{/public/board/type/all}">전체 보기</a>
+            <a class="not-active" id="date" th:href="@{/public/board/type/date}">날짜 순</a>
+            <a class="not-active" id="count" th:href="@{/public/board/type/count}">조회 순</a>
+        </div>
+        <div class="text-bar">
+            <th:block th:if="${#strings.equals(result.type, 'keyword')}">
+                <span>검색 게시물 <i class="fa-solid fa-chevron-right" style="margin-right: 5px;"></i> <span th:text="${result.totalPost}"></span>건 존재</span>
+            </th:block>
+            <th:block th:if="!${#strings.equals(result.type, 'keyword')}">
+                <span>총 게시물 <i class="fa-solid fa-chevron-right" style="margin-right: 5px;"></i> <span th:text="${result.totalPost}"></span>건 등록</span>
+            </th:block>
+            <div class="input-box">
+                <label for="input" hidden="hidden"></label>
+                <input id="input" placeholder="원하는 검색어를 입력해보세요!" type="text" class="input"/>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <th:block th:if="${result.totalPost == 0}">
+            <p class="no-message">아직 등록된 Pet Q&A가 없습니다. <br> 등록해보세요!</p>
+        </th:block>
+        <th:block th:if="${result.totalPost > 0}">
+            <table class="table table-bordered table-hover">
+                <thead class="table-head">
+                <tr>
+                    <th scope="col" style="width:5%;">No.</th>
+                    <th scope="col" style="width:50%;">제목</th>
+                    <th scope="col" style="width:10%;">작성자</th>
+                    <th scope="col" style="width:15%;">작성일</th>
+                    <th scope="col" style="width:10%;">조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="result : ${result.posts}">
+                    <th scope="row" class="text-center text_number" th:text="${result.post.id}"></th>
+                    <td class="text_title"><a th:href="@{/public/board/{postId}(postId=${result.post.id})}" th:text="${result.post.title}"></a></td>
+                    <td class="text-center author" th:text="${result.author}"></td>
+                    <td class="text-center modifyDate"  th:text="${#strings.setSplit(result.post.createdDateTime,'T')[0]}"></td>
+                    <td class="text-center totalCount" th:text="${result.post.totalCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </th:block>
+        <button th:href="@{/private/board/write}" class="add-post-button">Q&A 작성</button>
+        <div class="move_container">
+            <i class="fa-solid fa-angles-left" id="prevSection"></i>
+            <i class="fa-solid fa-chevron-left" id="prevButton"></i>
+            <span class="move_number"></span>
+            <i class="fa-solid fa-chevron-right" id="nextButton"></i>
+            <i class="fa-solid fa-angles-right" id="nextSection"></i>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const currentSection = [[ ${ result.currentSection } ]];
+            const endSection = [[ ${ result.endSection } ]];
+            const posts = [[ ${ result.posts } ]];
+            const currentPage = [[ ${ result.currentPage }]];
+            const totalPage = [[ ${ result.totalPage } ]];
+            const postType = [[ ${ result.type } ]];
+        </script>
+        <script th:src="@{/js/board/board.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

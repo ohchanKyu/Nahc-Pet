@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/myInformation.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="loading-modal">
+        <div class="loading-modal-container">
+            <div class="loading-modal-box">
+                <h1> NaHC </h1>
+                <p> 데이터를 처리중입니다. <br/>잠시만 기다려주세요. </p>
+                <img th:src="@{/assets/Spinner.gif}" alt="loading"/>
+            </div>
+        </div>
+    </div>
+    <div class="sub-header">
+        <p>
+            마이페이지 <i class="fa-solid fa-chevron-right"></i>
+            <span style="padding-left:5px" th:text="${koType}"></span>
+        </p>
+    </div>
+    <div class="header">
+        <h1>마이페이지</h1>
+        <p>
+            마이페이지입니다. 나의 정보를 변경하거나 <br>
+            즐겨찾기, 나의 게시물 및 리뷰 목록을 확인해보세요!
+        </p>
+    </div>
+    <div class="link-container">
+        <div th:class="favorite"
+             th:classappend="${type == 'favorite'} ? ' active' : ''">
+            <a href="/private/me/favorite">
+                <i class="fa-solid fa-star"></i> 즐겨찾기
+            </a>
+        </div>
+        <div class="post"
+             th:classappend="${type == 'post'} ? ' active' : ''">
+            <a href="/private/me/post">
+                <i class="fa-solid fa-pen-to-square"></i> 게시물 및 리뷰
+            </a>
+        </div>
+        <div class="user"
+             th:classappend="${type == 'user'} ? ' active' : ''">
+            <a href="/private/me/user">
+                <i class="fa-solid fa-user"></i> 회원정보
+            </a>
+        </div>
+    </div>
+    <th:block th:if="${type == 'favorite'}">
+        <div class="modal fade" id="review-modal" tabindex="-1" aria-labelledby="review-modal" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered review-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5"></h1>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-sub-title">해당 장소에 대한 리뷰를 등록해보세요!</h4>
+                        <div class="wrap">
+                            <div class="rating">
+                                <label class="rating__label rating__label--half" for="starhalf">
+                                    <input type="radio" id="starhalf" class="rating__input" name="rating" value="0.5">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--full" for="star1">
+                                    <input type="radio" id="star1" class="rating__input" name="rating" value="1.0">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--half" for="star1half">
+                                    <input type="radio" id="star1half" class="rating__input" name="rating" value="1.5">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--full" for="star2">
+                                    <input type="radio" id="star2" class="rating__input" name="rating" value="2.0">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--half" for="star2half">
+                                    <input type="radio" id="star2half" class="rating__input" name="rating" value="2.5">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--full" for="star3">
+                                    <input type="radio" id="star3" class="rating__input" name="rating" value="3.0">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--half" for="star3half">
+                                    <input type="radio" id="star3half" class="rating__input" name="rating" value="3.5">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--full" for="star4">
+                                    <input type="radio" id="star4" class="rating__input" name="rating" value="4.0">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--half" for="star4half">
+                                    <input type="radio" id="star4half" class="rating__input" name="rating" value="4.5">
+                                    <span class="star-icon"></span>
+                                </label>
+                                <label class="rating__label rating__label--full" for="star5">
+                                    <input type="radio" id="star5" class="rating__input" name="rating" value="5.0">
+                                    <span class="star-icon"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="review_contents write">
+                            <label>
+                                <textarea cols="30" rows="10" class="review_textarea" maxlength="400"></textarea>
+                            </label>
+                        </div>
+                        <div class="review_write_footer_wrap">
+                            <div class="review_write_footer">
+                                <div class="guide_review">
+                                    <span>0</span>/400
+                                    <span>(최소5자이상)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="file-text-box">
+                            <p class="file-text"><i class="fa-solid fa-check"></i> 아래쪽 버튼을 클릭하여 파일을 첨부해주세요.</p>
+                            <p class="file-text"><i class="fa-solid fa-check"></i> 이미지 파일은 3개까지 가능하며. 필수 항목이 아닙니다.</p>
+                            <div class="file-container">
+                                <label class="file-button" for="file">
+                                    <i class="fa-solid fa-folder-plus file-icon"></i>
+                                </label>
+                                <input type="file" id="file">
+                                <div class="file-list"></div>
+                            </div>
+                        </div>
+                        <button
+                            id="review-button"
+                            onclick="addReviewHandler(this)"
+                            class="register-review-button">
+                            리뷰 등록
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <p th:if="${favorite.size() > 0}" class="favorite-count">
+                총 <span th:text="${favorite.size()}"></span>건을 즐겨찾기로 등록하셨습니다! <br>
+                현재 위치를 기반으로 교통정보를 제공합니다. 확인해보세요! <br>
+                <br>
+                즐겨찾기 항목에 대해서는 리뷰 작성이 가능합니다. <br>
+                이미 리뷰를 작성하셨다면 추가 등록이 아닌 수정만 가능합니다.
+            </p>
+            <th:block th:if="${favorite.size() == 0}">
+                <p class="no-message">아직 등록된 즐겨찾기가 없습니다. <br> 장소를 등록해보세요! </p>
+            </th:block>
+            <div class="favorite-list-wrapper">
+                <div class="wrapper" th:each="result : ${favorite}">
+                    <div class="modal fade" th:id="'place-modal'+${result.place.id}" tabindex="-1" aria-labelledby="traffic-modal" aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered place-modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" th:text="'# '+${result.place.placeName}"></h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="info-body">
+                                        <div class="main-body">
+                                            <p class="body-title">장소 기본정보</p>
+                                            <li class="place-info">
+                                                <p><i class="fa-solid fa-location-dot"></i> 주소</p>
+                                                <span th:text="${result.place.address}"></span>
+                                            </li>
+                                            <li class="place-info">
+                                                <p><i class="fa-solid fa-clock"></i> 운영시간</p>
+                                                <span th:text="${result.place.operatingInfo}"></span>
+                                            </li>
+                                            <li class="place-info">
+                                                <p><i class="fa-regular fa-clock"></i> 휴뮤일</p>
+                                                <span th:text="${result.place.holidayInfo}"></span>
+                                            </li>
+                                            <li class="place-info">
+                                                <p><i class="fa-solid fa-phone-volume"></i> 연락처</p>
+                                                <span th:text="${result.place.phoneNumber}"></span>
+                                            </li>
+                                            <li class="place-info">
+                                                <p><i class="fa-solid fa-square-parking"></i> 주차 가능여부</p>
+                                                <span  th:text="${result.place.isParking}"></span>
+                                            </li>
+                                        </div>
+                                        <hr>
+                                        <div id="detail-body${cafeData[i].place.id}" class="detail-body">
+                                            <p class="body-title">장소 세부정보</p>
+
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 입장(이용료)가격 정보</p>
+                                                <span th:text="${result.place.feeInfo}"></span>
+                                            </li>
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 애견 동반 추가 요금</p>
+                                                <span th:text="${result.place.addFeeInfo}"></span>
+                                            </li>
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 장소(실외)여부</p>
+                                                <span th:text="${result.place.isOutside}"></span>
+                                            </li>
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 장소(실내)여부</p>
+                                                <span th:text="${result.place.isInside}"></span>
+                                            </li>
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 제한사항</p>
+                                                <span th:text="${result.place.restrictionInfo}"></span>
+                                            </li>
+                                            <li class="place-info detail">
+                                                <p><i class="fa-solid fa-square-check"></i> 입장 가능 동물 크기</p>
+                                                <span th:text="${result.place.maxSizeInfo}"></span>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        data-bs-toggle="modal"
+                        th:attr="data-bs-target='#traffic-modal'+${result.place.id}"
+                        class="traffic-box">
+                        <i class="fa-solid fa-car"></i> 교통정보
+                    </div>
+                    <h4 class="place-title" th:text="'# '+${result.place.placeName}"></h4>
+                    <ul class="place-detail-wrapper">
+                        <li class="place-detail-category">
+                            <p>
+                                <i class="fa-solid fa-icons"></i> 카테고리 <i class="fa-solid fa-chevron-right"></i>
+                               <span class="category" th:text="${result.place.category}"></span>
+                            </p>
+                        </li>
+                        <li class="place-detail">
+                            <p><i class="fa-solid fa-location-dot"></i> 주소</p>
+                            <span th:text="${result.place.address}"></span>
+                        </li>
+                        <li class="place-detail">
+                            <p><i class="fa-solid fa-clock"></i> 운영시간</p>
+                            <span th:text="${result.place.operatingInfo}"></span>
+                        </li>
+                        <li class="place-detail">
+                            <p><i class="fa-regular fa-clock"></i> 휴뮤일</p>
+                            <span th:text="${result.place.holidayInfo}"></span>
+                        </li>
+                        <li class="place-detail">
+                            <p><i class="fa-solid fa-phone-volume"></i> 연락처</p>
+                            <span th:text="${result.place.phoneNumber}"></span>
+                        </li>
+                    </ul>
+                    <div class="button-container">
+                        <button class="place-button"
+                                data-bs-toggle="modal"
+                                th:attr="data-bs-target='#place-modal'+${result.place.id}">
+                            <i class="fa-solid fa-location-arrow"></i> 장소정보
+                        </button>
+                        <button
+                            th:onclick="'deleteFavoriteHandler(' + ${result.id} + ')'"
+                            class="favorite-delete-button">
+                            <i class="fa-solid fa-trash-can"></i> 즐겨찾기 해제
+                        </button>
+                    </div>
+                    <p class="review-button"
+                            data-bs-toggle="modal"
+                            th:onclick="'initializeReview('+${result.place.id}+')'"
+                            data-bs-target="#review-modal">
+                        <i class="fa-solid fa-pen-to-square"></i> 리뷰 작성 / 변경
+                    </p>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <div class="modal-container"></div>
+    <th:block th:if="${type == 'post'}">
+        <div class="modal fade" id="review-detail-modal" tabindex="-1" aria-labelledby="review-modal" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered review-detail-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5"></h1>
+                    </div>
+                    <div class="modal-body">
+                        <h4 class="modal-sub-title"> 등록하신 리뷰 상세 정보입니다.</h4>
+                        <div class="file-list-box"></div>
+                        <div class="text-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-content-container">
+            <div class="post-container">
+                <h4> <i class="fa-solid fa-pen-to-square"></i> 나의 Q&A</h4>
+                <p th:if="${post.size() > 0}" class="favorite-count">
+                    총 <span th:text="${post.size()}"></span>건의 Q&A를 작성하셨습니다!
+                </p>
+                <th:block th:if="${post.size() == 0}">
+                    <p class="no-message">아직 Q&A 게시물이 없습니다. <br> 게시물을 등록해보세요! </p>
+                </th:block>
+                <div class="post-wrapper-container">
+                    <div class="post-wrapper" th:each="result : ${post}">
+                        <h5 th:text="'# '+${result.post.title}"></h5>
+                        <div class="post-detail">
+                            <p><i class="fa-solid fa-square-check"></i> 작성자 </p>
+                            <p th:text="${result.author}"></p>
+                        </div>
+                        <div class="post-detail">
+                            <p> <i class="fa-solid fa-square-check"></i> 작성일<p>
+                            <p th:text="${#strings.setSplit(result.post.createdDateTime,'T')[0]}"></p>
+                        </div>
+                        <div class="post-detail">
+                            <p><i class="fa-solid fa-square-check"></i> 조회수 </p>
+                            <p th:text="${result.post.totalCount}+'회'"></p>
+                        </div>
+                        <div class="post-navi-wrapper">
+                            <a class="post-navi" th:href="@{/public/board/{id}(id=${result.post.id})}">Q&A 바로가기 <i class="fa-solid fa-location-arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-container">
+                <h4><i class="fa-solid fa-message count-icon"></i> 나의 Review</h4>
+                <div id="image-modal" class="image-modal">
+                    <span class="close">&times;</span>
+                    <img alt='full-image' class="image-modal-content" id="full-image" src=""/>
+                    <p class="sub-text"></p>
+                </div>
+                <p th:if="${review.size() > 0}" class="favorite-count">
+                    총 <span th:text="${review.size()}"></span>건의 리뷰를 작성하셨습니다!
+                </p>
+                <th:block th:if="${review.size() == 0}">
+                    <p class="no-message">아직 등록된 리뷰가 없습니다. <br> 리뷰를 등록해보세요! </p>
+                </th:block>
+                <div class="post-wrapper-container comment">
+                    <div class="post-wrapper" th:each="result : ${review}">
+                        <h5 th:text="'# '+${result.place.placeName}"></h5>
+                        <div class="post-detail">
+                            <p><i class="fa-solid fa-square-check"></i> 장소 카테고리 </p>
+                            <p th:text="${result.place.category}"></p>
+                        </div>
+                        <div class="post-detail">
+                            <p><i class="fa-solid fa-square-check"></i> 리뷰 평점 </p>
+                            <p th:text="${result.rating}+' / 5.0'"></p>
+                        </div>
+                        <div class="post-detail">
+                            <p><i class="fa-solid fa-square-check"></i> 리뷰 작성일 </p>
+                            <p th:text="${#strings.setSplit(result.createdDateTime,'T')[0]}"></p>
+                        </div>
+                        <div class="review-button-container">
+                            <button class="place-button"
+                                    th:onclick="'initialReviewDetail(' + ${result.id} + ')'"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#review-detail-modal">
+                                <i class="fa-solid fa-location-arrow"></i> 리뷰 정보
+                            </button>
+                            <button
+                                th:onclick="'deleteReviewHandler(' + ${result.id} + ')'"
+                                class="favorite-delete-button">
+                                <i class="fa-solid fa-trash-can"></i> 리뷰 삭제
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block th:if="${type == 'user'}">
+        <div class="content-container">
+            <div class="margin-wrapper">
+                <div class="user-wrapper">
+                    <div class="user-header">
+                        <div class="logo-wrapper">
+                            <i class="fa-solid fa-dog dog-icon"></i>
+                        </div>
+                        <p class="user-name" th:text="${member.name}+'님'"></p>
+                    </div>
+                    <div class="header-container">
+                        <div class="user-info-text">
+                            <p class="title-1">가입일</p>
+                            <p class="date" th:text="${#strings.setSplit(member.modifiedDateTime,'T')[0]}"></p>
+                            <p class="title-1">그룹</p>
+                            <p class="authority" th:text="${#strings.equals(member.role, 'ADMIN') ? '관리자' : '사용자'}"></p>
+
+                        </div>
+                        <div class="header-text">
+                            <p class="title-1">작성</p>
+                            <p class="user-favorite-count">
+                                <span style="padding-right:20px;">즐겨찾기</span> <span style="color:#453fb2;margin-left:auto;" th:text="${favorite.size()}+'개'"></span>
+                            </p>
+                            <p class="user-post-count">
+                                <span style="padding-right:20px;">Q&A</span> <span style="color:#453fb2;margin-left:auto;" th:text="${post.size()}+'개'"></span>
+                            </p>
+                            <p class="user-post-count">
+                                <span style="padding-right:20px;">리뷰</span> <span style="color:#453fb2;margin-left:auto;" th:text="${review.size()}+'개'"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="section-container">
+                        <h4 class="section-header"><i class="fa-solid fa-gear"></i> 회원 계정관리</h4>
+                        <div class="input-container">
+                            <label for="name" class="form-label name">회원 이름</label>
+                            <div class="input-flex-box">
+                                <input id="name"
+                                       th:value="${member.name}"
+                                       placeholder="이름을 입력하세요."
+                                       class="form-control" type="text">
+                                <button class="save" id="name-save-button">저장</button>
+                            </div>
+                            <hr>
+                            <label for="email" class="form-label id">회원 이메일</label>
+                            <div class="input-flex-box">
+                                <input id="email" th:value="${member.email}" placeholder="이메일을 입력하세요." class="form-control" type="text">
+                                <button class="save" id="email-save-button">저장</button>
+                            </div>
+                            <hr>
+                            <div class="change-password-wrapper">
+                                <p class="password-description">※ 비밀번호 변경은 해당 페이지로 이동해서 변경해주세요!</p>
+                                <button class="change-password-button">
+                                    <a
+                                        th:href="@{/auth/findPassword}">
+                                        <i class="fa-solid fa-location-arrow"></i> 변경하러 가기
+                                    </a>
+                                </button>
+                            </div>
+                            <hr>
+                            <div class="delete-modal-wrapper">
+                                <p class="description">※ 탈퇴를 원하시면 회원탈퇴 버튼을 눌러주세요!</p>
+                                <button
+                                        id="delete-modal-button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target='#delete-modal'><i class="fa-solid fa-trash-can"></i> 회원탈퇴</button>
+                            </div>
+                            <div class="modal fade"
+                                 id="delete-modal"
+                                 data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel"># 회원탈퇴</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="header_text" th:text="${member.name} + '님 NaHC 탈퇴 전 확인하세요.'"></p>
+                                            <p class="text">
+                                                탈퇴하시면 이용중인 NaHC Pet Service가 폐쇄되며 <br/>
+                                                모든 데이터는 복구 불가입니다.
+                                            </p>
+                                            <ul class="check_list">
+                                                <li class="check_one">
+                                                    Q&A 게시물, 댓글, 즐겨찾기, 프로필 등 모든 정보가 삭제됩니다.
+                                                </li>
+                                                <li class="check_two">
+                                                    이전 정보는 모두 삭제되며 필요한 데이터는 미리 백업을 해주세요.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="close-button" data-bs-dismiss="modal">닫기</button>
+                                            <button th:data="${member.id}" type="button" id="delete-user-button">탈퇴</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const post = [[ ${ post } ]];
+            const favoritePlaceData = [[ ${favorite} ]];
+        </script>
+        <script th:src="@{/js/auth/review.js}"></script>
+        <script th:src="@{/js/api/authApi.js}"></script>
+        <script th:src="@{/js/api/favoriteApi.js}"></script>
+        <script th:src="@{/js/api/reviewApi.js}"></script>
+        <script th:src="@{/js/api/placeApi.js}"></script>
+        <script th:src="@{/js/api/postApi.js}"></script>
+        <script th:src="@{/js/myInformation.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

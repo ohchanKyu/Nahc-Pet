@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+   xmlns:th="http://www.thymeleaf.org"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+   layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <style>
+        .ck-content {
+            color:#333;
+            font-size: 15px;
+            font-weight:bold;
+            font-family: "Noto Sans KR", sans-serif;
+            min-height:300px;
+        }
+    </style>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/board/boardWrite.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> Pet Q&A <i class="fa-solid fa-chevron-right"></i> Q&A 변경 </p>
+    </div>
+    <div class="sub-header">
+        <h1>Q&A 변경</h1>
+        <p>
+            해당 Q&A 게시물을 변경해보세요! <br>
+            해당 게시물의 댓글은 그대로 유지됩니다.
+        </p>
+        <div class="select-bar">
+            <th:block sec:authorize="isAuthenticated()">
+                <button id="me">내 Q&A</button>
+            </th:block>
+            <button id="all">Q&A 전체보기</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="rule-box">
+            <h4><i class="fa-regular fa-bell"></i> Notice!</h4>
+            <ul class="rule-list">
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 제목은 최대 255자까지 입력가능합니다.</li>
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 본문은 최대 10000자까지 입력가능합니다.</li>
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 게시물은 내 Q&A > 삭제를 통해 삭제가능합니다.</li>
+            </ul>
+        </div>
+        <form class="post-form" method="post">
+            <label for="title" class="title">Q&A Title</label>
+            <input th:value="${result.post.title}" type="text" id="title"/>
+            <label for="editor" class="editor">Q&A Content</label>
+            <textarea class="form-control content" id="editor" th:utext="${result.post.content}"></textarea>
+        </form>
+        <div class="button-box">
+            <button class="form-submit">제출</button>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const postId = [[ ${result.post.id} ]];
+            const type = "edit";
+        </script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <script th:src="@{/js/board/boardWrite.js}"></script>
+        <script th:src="@{/js/api/postApi.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

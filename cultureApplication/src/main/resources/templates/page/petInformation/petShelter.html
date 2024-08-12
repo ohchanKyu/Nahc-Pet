@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/petInformation/petShelter.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> 추가 장소 정보 <i class="fa-solid fa-chevron-right"></i> 동물 보호센터 </p>
+    </div>
+    <div class="sub-header">
+        <h3>동물 보호센터</h3>
+        <p>
+            전국에 존재하는 동물 보호센터 위치 정보에 대해 알려드립니다. <br>
+            지도와 함께 동물 보호센터의 위치와, 유기동물 입양 절차에 대해서도 알아보세요! <br>
+            국가동물보호정보시스템에 존재하는 동물 보호센터의 정보입니다.
+        </p>
+    </div>
+    <div id="map-wrapper" class="animation-tag">
+        <h4 class="map-description">
+            # 지도와 함께 보호센터를 찾아보세요!
+        </h4>
+        <div id="map"></div>
+        <div class="custom_zoom radius_border">
+            <span onclick="zoomIn()">
+                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대">
+            </span>
+            <span onclick="zoomOut()">
+                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소">
+            </span>
+        </div>
+        <div class="region-container">
+            <label for="region"></label>
+            <select id="region" class="form-select form-select-sm mb-3">
+                <option selected>지역 선택</option>
+                <option value="경기도">경기도</option>
+                <option value="전라남도">전라남도</option>
+                <option value="서울특별시">서울특별시</option>
+                <option value="인천광역시">인천광역시</option>
+                <option value="경상북도">경상북도</option>
+                <option value="대구광역시">대구광역시</option>
+                <option value="세종특별자치시">세종특별자치시</option>
+                <option value="전북특별자치도">전북특별자치도</option>
+                <option value="경상남도">경상남도</option>
+                <option value="강원특별자치도">강원특별자치도</option>
+                <option value="부산광역시">부산광역시</option>
+                <option value="광주광역시">광주광역시</option>
+                <option value="대전광역시">대전광역시</option>
+                <option value="충청북도">충청북도</option>
+                <option value="제주특별자치도">제주특별자치도</option>
+                <option value="충청남도">충청남도</option>
+                <option value="울산광역시">울산광역시</option>
+                <option value="전라북도">전라북도</option>
+            </select>
+        </div>
+        <div class="search-box" onclick="centerMarkerHandler()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+    <hr>
+    <div class="sub-header">
+        <h3>유실 유기동물 입양 절차</h3>
+        <p>
+            유실 유기동물 입양 절차 및 예정자 교육에 대해서 알아보세요! <br>
+            ※ 해당 정보는 국가동물보호정보시스템에 기반하여 작성하였습니다.
+        </p>
+    </div>
+    <div class="card-container">
+        <div class="card_common current-card">
+            <h4>유실 유기동물 <br> 입양 절차</h4>
+            <p>
+                유실 유기동물에 대한 <br> 입양 절차를 살펴보세요! <br>
+                동물보호정보시스템 및 동물보호센터와 <br>
+                교류가 필요합니다!
+            </p>
+            <button data-bs-toggle="modal"
+                    data-bs-target="#first-modal">바로보기</button>
+        </div>
+        <div class="card_common address-card">
+            <h4>유실 유기동물 <br> 입양비 지원 사업</h4>
+            <p>
+                동물보호센터에서 유기･유실동물을 <br>
+                반려동물로 입양 시  <br>
+                발생하는 비용을 일부 지원해줍니다. <br>
+                지금 바로 확인해보세요!
+            </p>
+            <button data-bs-toggle="modal"
+                    data-bs-target="#second-modal">바로보기</button>
+        </div>
+        <div class="card_common current-card">
+            <h4>반려동물 <br> 입양 예정자 교육</h4>
+            <p>
+                반려동물과 사람의 행복한 동거를 위해 <br>
+                성숙한 반려인이 될 수 있도록 <br>
+                강의를 통해 동물에 대한 이해를 돕고 <br>
+                기본 양육정보를 제공합니다. <br>
+            </p>
+            <button
+                data-bs-toggle="modal"
+                data-bs-target="#third-modal">바로보기</button>
+        </div>
+    </div>
+    <div class="modal fade" id="first-modal" tabindex="-1" aria-labelledby="first-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered first-modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                   <h3 class="first-title">유실 유기동물 입양 절차</h3>
+                   <div class="list-wrapper">
+                       <p class="title">
+                           입양전 확인
+                       </p>
+                       <p class="description">
+                           동물보호관리시스템(animal.go.kr) 홈페이지에서 <br>
+                           유실유기동물 <i class="fa-solid fa-circle-right"></i> 보호중 동물 확인
+                       </p>
+                   </div>
+                    <div class="icon-wrapper"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="list-wrapper">
+                        <p class="title two">
+                            입양 상담 예약
+                        </p>
+                        <p class="description">
+                            동물보호센터 방문 전, 공고번호 확인 후 전화문의 및 방문 일정 예약 <br>
+                            <span>※ 동물보호센터별 입양 예정자 교육 수료증 제출이 입영 절차에 <br> 포함된 경우도 있으니 별도 확인 필요 </span> <br>
+                            <span> ※ 동물보호센터 정보 동물보호센터관리시스템(animal.go.kr) 접속 후 <br>
+                            <i class="fa-solid fa-circle-right"></i> 유실유기동물 <i class="fa-solid fa-circle-right"></i> 동물보호센터 정보 조회 </span>
+                        </p>
+                    </div>
+                    <div class="icon-wrapper"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="list-wrapper">
+                        <p class="title">
+                            입양 신청
+                        </p>
+                        <p class="description">
+                            유실 유기동물 입양 희망 시 서류 작성 등 입양 신청 <br>
+                            <span> ※ 입양 후 파양은 불가능합니다. 가족 구성원 모두가 <br> 신중하게 생각하시고 입양을 결정해 주세요. </span>
+                        </p>
+                    </div>
+                    <div class="icon-wrapper"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="list-wrapper">
+                        <p class="title two">
+                            입양 완료
+                        </p>
+                        <p class="description">
+                            동물의 건강상태 특성에 대한 설명과 동물등록, 인식표 및 목줄 착용, <br>
+                            안전조치 등 양육정보를 교육 받은 후 입양을 진행
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="second-modal" tabindex="-1" aria-labelledby="second-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered first-modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="second-title">유실 유기동물 입양비 지원 사업</h3>
+                    <div class="list-wrapper2">
+                        <p class="title2">
+                            목적
+                        </p>
+                        <p class="description">
+                            동물보호센터에서 유실 유기동물을 반려동물로 입양 시 발생하는 비용을
+                            일부 지원하여 유실 유기동물 입양 활성화
+                        </p>
+                    </div>
+                    <div class="list-wrapper2">
+                        <p class="title2">
+                            대상
+                        </p>
+                        <p class="description">
+                            동물보호센터에서 유실 유기동물을 반려동물로 입양한 자
+                        </p>
+                    </div>
+                    <div class="list-wrapper2">
+                        <p class="title2">
+                            지원 내용
+                        </p>
+                        <p class="description">
+                            입양 시 소요되는 진료비,수술비,예방접종,중성화 수술, 미용, 보험료 등
+                            소요 비용의 100% 지원(최대 25만원 한도) <br>
+                            <span> ※ 최대 지원 비용 및 상세 내용은 반드시 동물보호센터 담당부서를 통해 문의해야합니다. </span>
+                        </p>
+                    </div>
+                    <div class="list-wrapper2">
+                        <p class="title2">
+                            신청시기
+                        </p>
+                        <p class="description">
+                           입양 후 6개월 이내 (동물보호 담당부서에 문의)
+                        </p>
+                    </div>
+                    <h3 class="second-title"># 신청 절차</h3>
+                    <div class="produce-wrapper">
+                        <div class="produce">
+                            <h4 class="produce-title">
+                                동물보호센터
+                            </h4>
+                            <p class="produce-description">
+                                상담/교육/인도 <br> 입양확인서발급
+                            </p>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <div class="produce">
+                            <h4 class="produce-title">
+                                입양자
+                            </h4>
+                            <p class="produce-description">
+                                병원치료, 미용(중성화수술, 질병치료, 예방접종, 미용, 보험)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="produce-wrapper">
+                        <div class="produce">
+                            <h4 class="produce-title">
+                                입양자
+                            </h4>
+                            <p class="produce-description">
+                                서류지참 후 관할구청 제출 <strong>
+                                신분증, 통장사본, 동물등록증, 입양확인서, 입양비용청구서, 세부내역 영수증 등
+                            </strong>
+                            </p>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                        <div class="produce">
+                            <h4 class="produce-title">
+                                시 군 구
+                            </h4>
+                            <p class="produce-description">
+                                동물 등록 등 확인 입양비 지원 (입양자)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="third-modal" tabindex="-1" aria-labelledby="third-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h3 class="third-title">반려동물 입양 예정자 교육</h3>
+                    <p class="third-description">
+                        반려동물과 사람의 행복한 동거를 위해 성숙한 반려인이 될 수 있도록 <br>
+                        강의를 통해 동물에 대한 이해를 돕고 기본 양육정보를 제공합니다.
+                    </p>
+                </div>
+                <div class="link-wrapper">
+                    <a target="_blank" href="https://apms.epis.or.kr/home/kor/main.do"><i class="fa-solid fa-location-arrow"></i> 동물사랑배움터 바로가기</a>
+                </div>
+                <div class="watch-list">
+                    <div class="watch">
+                        <h5>1. 동물사람배움터</h5>
+                        <p>(apms.epis.or.kr) <br> 접속 및 회원가입</p>
+                    </div>
+                    <div class="watch">
+                        <h5>2. 교육 신청</h5>
+                        <p>
+                            - 교육 과정 <br>
+                            - 국민 대상  <br>
+                            - <span style="color:#e39900;"> '반려동물 입양 예정자 교육' </span> 선택</p>
+                    </div>
+                    <div class="watch">
+                        <h5>3. 학습하기</h5>
+                        <p>
+                            1~4차시 학습 진행 <br>
+                            <span style="opacity: 0.7;">(총 120분 소요)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const shelterData = [[ ${ petShelter } ]];
+        </script>
+        <script th:src="@{/js/api/kakaoMap.js}"></script>
+        <script th:src="@{/js/petInformation/petShelter.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

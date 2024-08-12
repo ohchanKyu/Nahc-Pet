@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/main.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="main-header-section">
+        <div class="img-section">
+            <img class="main-image" th:src="@{/assets/main_bg.jpg}" alt="main-image"/>
+        </div>
+        <div class="description-container">
+            <h2 class="description-main-header">NaHC Pet Service</h2>
+            <h4 class="description-sub-header">
+                반려 동물 문화 플랫폼
+            </h4>
+            <p class="description-main-text">
+                반려 동물과 함께하는 <br> 문화 장려 플랫폼입니다. <br>
+                여러 반려동물 동반 장소를 파악하고 <br> 반려동물과 관련된 정보도 얻어보세요! <br>
+            </p>
+            <div class="card-container">
+                <a href="#first" class="info-card">
+                    <h6>반려동물과 함께</h6>
+                    <p>
+                        반려동물 동반 가능한 장소들을 만나보세요!
+                    </p>
+                </a>
+                <a href="#second" class="info-card">
+                    <h6>추가 장소 정보</h6>
+                    <p>
+                        추가적인 여러 장소와 <br> 정보들을 만나보세요!
+                    </p>
+                </a>
+                <a href="#third" class="info-card">
+                    <h6>Pet Q&A</h6>
+                    <p>
+                        Pet Q&A을 통해 <br> 소통해보세요!
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="main-section">
+        <div id="first" class="first-section in_view">
+            <h1 class="section-header" >반려동물과 함께</h1>
+            <p class="section-description">
+                반려동물 동반 가능한 장소들을 카테고리 별로 만나보실 수 있습니다. <br>
+                추가적으로 위치 기준 교통정보, AI 채팅까지 제공합니다. <br>
+                지금 바로 사용해보세요!
+            </p>
+            <div class="section-card-container">
+                <div class="main-card">
+                    <h5 class="main-card-title">반려동물 관리</h5>
+                    <p class="main-card-description">
+                        근처에 있는 반려동물용품, <br> 미용 및 위탁관리 정보를 만나보세요!
+                    </p>
+                    <a th:href="@{/private/pet/care}">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="main-card">
+                    <h5 class="main-card-title">박물관 및 여행지</h5>
+                    <p class="main-card-description">
+                        근처에 있는 반려동물 동반 문예회관, <br> 박물관, 미술관 정보를 만나보세요!
+                    </p>
+                    <a th:href="@{/private/pet/tour}">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="main-card">
+                    <h5 class="main-card-title">식당 및 펜션</h5>
+                    <p class="main-card-description">
+                        근처에 있는 반려동물 동반 카페, <br> 식당 및 펜션 정보를 만나보세요!
+                    </p>
+                    <a th:href="@{/private/pet/hotel}">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="main-card">
+                    <h5 class="main-card-title">병원 및 약국</h5>
+                    <p class="main-card-description">
+                        근처에 있는 반려동물 병원 및 <br> 약국 정보를 만나보세요!
+                    </p>
+                    <a th:href="@{/private/pet/hospital}">바로가기 <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div id="second" class="second-section in_view">
+            <h1 class="section-header">추가 장소 정보</h1>
+            <p class="section-description">
+                추가적인 장소 정보인 애견 카페, 애견 훈련소, 동물 보호센터 정보를 알려드립니다.<br>
+                애견 훈련 블로그, 유실 유기동물 입양 절차 정보도 제공합니다.<br>
+                지금 바로 사용해보세요!
+            </p>
+            <div class="section-card-container">
+                <div class="card_common">
+                    <h4>애견 카페</h4>
+                    <p>근처에 있는  <br> 애견 카페 정보를알려드립니다. <br> 새로운 반려견들을 만나보세요!</p>
+                    <button id="first-button">바로가기 <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="card_common">
+                    <h4>애견 훈련소</h4>
+                    <p> 근처에 있는  <br> 애견 훈련소 정보를 알려드립니다. <br> 훈련 블로그도 참고해보세요!</p>
+                    <button id="second-button">바로가기 <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="card_common">
+                    <h4>동물 보호센터</h4>
+                    <p>전국에 존재하는 동물 보호센터 <br> 위치 정보에 대해 알려드립니다. <br>  유기동물 입양 절차에 대해서도 알아보세요!</p>
+                    <button id="third-button">바로가기 <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="third" class="third-section in_view">
+                <h1 class="section-header">Pet Q&A</h1>
+                <p class="section-description">
+                    궁금한 것이나 질문사항들을 Pet Q&A 게시판에 등록해보세요.<br>
+                    댓글을 통해 서로 소통할 수 있습니다!
+                </p>
+                <div class="post-container">
+                    <div id="post" class="post-wrapper">
+                        <h4><i class="fa-solid fa-message"></i> Pet Q&A</h4>
+                        <p>
+                            Pet Q&A에서 여러가지 <br> 반려동물 관련된 것을 공유해보세요! <br>
+                            댓글을 통해 다른 사용자들과 소통가능합니다.
+                        </p>
+                    </div>
+                    <div id="info" class="my-info-wrapper">
+                        <h4><i class="fa-solid fa-gear"></i> 마이페이지</h4>
+                        <p>
+                            마이페이지에서 나의 게시물과 댓글을 확인해보세요! <br>
+                            나의 즐겨찾기도 마이페이지에서 확인가능합니다. <br>
+                            즐겨찾기 장소의 교통정보를 바로 만나보세요!
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="api_section in_sectionView">
+        <h1 class="section-header">Data & API</h1>
+        <p class="section-description">
+           해당 서비스는 문화 빅데이터 플랫폼의 장소 데이터를 기반으로 구성되어있습니다. <br>
+           추가적인 교통정보 및 AI 채팅은 Kakao와 Google의 Gemini 서비스와 함께합니다.
+        </p>
+        <div class="row api_list">
+            <div class="col col-lg-3 api_container">
+                <div class="api_title">
+                    문화 빅데이터 플랫폼
+                </div>
+                <div class="api_text">
+                    한국문화정보원 <br> 전국 반려동물 동반가능 <br>
+                    문화시설 위치 데이터
+                </div>
+            </div>
+            <div class="col col-lg-3 api_container">
+                <div class="api_title">
+                    Kakao
+                </div>
+                <div class="api_text">
+                    Kakao API를 통해 <br> 실시간 교통정보 및 <br>
+                    관련 블로그 제공
+                </div>
+            </div>
+            <div class="col col-lg-3 api_container">
+                <div class="api_title">
+                    Gemini
+                </div>
+                <div class="api_text">
+                    Google AI의 <br> Gemini API를 통해 <br> AI 채팅 모델 제공
+                </div>
+            </div>
+            <div class="api_link_container">
+                <p class="api_link_text">※ 사용 API에 대한 자세한 정보를 원하시면 아래 링크를 참조해주세요.</p>
+                <div class="api_link_list">
+                    <div class="api_link">
+                        문화 빅데이터 플랫폼 <i class="fa-solid fa-share"></i>  https://www.bigdata-culture.kr/bigdata/user/main.do
+
+                    </div>
+                    <div class="api_link">
+                        KaKao Developer <i class="fa-solid fa-share"></i> https://developers.kakao.com/
+                    </div>
+                    <div class="api_link">
+                        Google AI <i class="fa-solid fa-share"></i> https://ai.google.dev/ <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/main.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

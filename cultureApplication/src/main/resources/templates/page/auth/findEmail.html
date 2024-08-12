@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block th:replace="~{common/config :: configFragment}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/auth/findEmail.css}" >
+</head>
+<body>
+<div class="header">
+    <h1>NaHC Pet Service <i class="fa-solid fa-dog"></i></h1>
+    <p class="description">
+        반려동물 동반 가능한 여러 장소부터 애견 훈련 블로그, 동물 보호센터까지 <br>
+        반려동물과 관련된 여러 정보들을 만나보실 수 있습니다. <br>
+    </p>
+</div>
+<div class="wrapper">
+    <div class="find-email-form">
+        <p class="form-description">이메일 찾기</p>
+        <div class="findEmail-container">
+            <div class="input-container">
+                <label for="name" hidden="hidden" class="form-label name">이름 입력</label>
+                <input oninput="hideErrorMessage()" id="name"
+                       placeholder="가입하신 회원님의 이름을 입력해주세요."
+                       class="form-control" type="text">
+            </div>
+            <div class="show-box">
+                <p class="no-email-message"></p>
+                <div class="email-list-container">
+                    <ul class="email-list"></ul>
+                </div>
+            </div>
+            <div class="find-email-button-container">
+                <button id="find-email-button">이메일 찾기</button>
+            </div>
+            <div class="link-container">
+                <a href="/auth/login">로그인</a>
+                <span>|</span>
+                <a href="/auth/signup">회원가입</a>
+                <span>|</span>
+                <a href="/auth/findPassword">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/auth/findEmail.js}"></script>
+<script th:src="@{/js/api/authApi.js}"></script>
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+</body>
+</html>

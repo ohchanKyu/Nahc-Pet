@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block th:replace="~{common/config :: configFragment}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/auth/login.css}" >
+</head>
+<body>
+<div class="header">
+    <h1>NaHC Pet Service <i class="fa-solid fa-dog"></i></h1>
+    <p class="description">
+        반려동물 동반 가능한 여러 장소부터 애견 훈련 블로그, 동물 보호센터까지 <br>
+        반려동물과 관련된 여러 정보들을 만나보실 수 있습니다. <br>
+    </p>
+</div>
+<div class="wrapper">
+    <div class="login-form">
+        <p class="form-description">로그인</p>
+        <form th:action="@{/auth/login-proc}" method="post">
+            <div>
+                <label for="email" hidden="hidden">Email</label>
+                <input oninput="hideErrorMessage()" type="text" placeholder="이메일" id="email" name="email">
+            </div>
+            <div>
+                <label for="password" hidden="hidden">Password</label>
+                <input oninput="hideErrorMessage()" type="password" placeholder="비밀번호" id="password" name="password">
+            </div>
+            <div class="error-message-wrapper" th:if="${errorMessage != null}">
+                <p class="error-message" th:text="${errorMessage}"></p>
+            </div>
+            <div class="button-container">
+                <button class="submit-button" type="submit">로그인</button>
+            </div>
+        </form>
+        <div class="link-container">
+            <a href="/auth/signup">회원가입</a>
+            <span>|</span>
+            <a href="/auth/findEmail">이메일 찾기</a>
+            <span>|</span>
+            <a href="/auth/findPassword">비밀번호 찾기</a>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/auth/login.js}"></script>
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+</body>
+</html>

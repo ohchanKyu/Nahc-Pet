@@ -1,0 +1,195 @@
+.header{
+    width:100%;
+    padding:20px 0 20px 20px;
+    border-bottom:1px solid #333;
+}
+.header p {
+    margin:0;
+    font-size:14px;
+}
+.sub-header{
+    width:1000px;
+    margin:0 auto;
+}
+.sub-header h1 {
+    font-weight:bold;
+    text-align:center;
+    font-style:italic;
+    margin:30px 0;
+}
+.sub-header p {
+    font-size:15px;
+    color:#777;
+    margin:30px 0 0 0;
+    opacity: 0.7;
+    text-align: center;
+}
+.select-bar{
+    margin:50px 0 10px 0;
+    display:flex;
+    justify-content: flex-end;
+}
+.text-bar{
+    display:flex;
+    align-items:center;
+    justify-content: flex-start;
+}
+.input-box{
+    margin-left:auto;
+    margin-bottom:8px;
+    display: flex;
+    align-items: center;
+}
+.input{
+    display:block;
+    height:45px;
+    padding:10px 10px;
+    border:1px solid #c4c4c4;
+    background-color:#fff;
+    color:#333;
+    font-size: 14px;
+    font-weight:bold;
+    font-family: "Noto Sans KR", sans-serif;
+    box-sizing:border-box;
+    width:100%;
+}
+.input:focus{
+    border-color: #453fb2;
+    border-width: 1px;
+    outline: none;
+}
+.search-box{
+    text-align:center;
+    line-height:2.7;
+    font-weight:bold;
+    background-color:#453fb2;
+    width:60px;
+    height:45px;
+    margin-left:10px;
+    color:white;
+    cursor:pointer;
+    transition: transform 0.3s ease;
+}
+.search-box:hover{
+    transform: scale(1.1);
+}
+.text-bar span {
+    font-weight:bold;
+}
+.no-message{
+    color:red;
+    font-weight: bold;
+    text-align: center;
+    margin:50px 0;
+}
+.table-container{
+    border-top:1px solid #333;
+    width:1000px;
+    margin:0 auto;
+    padding-top:10px;
+}
+.select-bar a {
+    padding:6px 12px;
+    font-weight:bold;
+    text-decoration:none;
+    color:black;
+    margin:0 5px;
+    border-radius:5px;
+}
+.select-active{
+    background-color: #453fb2;
+    color:white !important;
+}
+.not-active:hover{
+    color: #453fb2;
+    background-color: #dcd6ff;
+}
+#count{
+    margin-right:0;
+}
+.table {
+    table-layout: fixed;
+    width:1000px !important;
+    border-radius:8px;
+}
+.table-head th {
+    text-align: center;
+    color:#fff;
+    background-color: #73685d;
+}
+.place-tr{
+    cursor: pointer;
+}
+.text_title a{
+    text-decoration: none;
+    color:black;
+    font-size:16px;
+}
+.text_number, td {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:14px;
+    font-weight: bold;
+}
+.author, .modifyDate, .totalCount, .likeCount{
+    font-size:14px;
+}
+.add-post-button{
+    float:right;
+    font-size:16px;
+    padding:6px 18px;
+    font-weight:bold;
+    text-decoration:none;
+    background-color:#453fb2;
+    color:white;
+    border:none;
+    border-radius:5px;
+    transition: transform 0.3s ease;
+}
+.add-post-button:hover{
+    transform: scale(1.1);
+}
+.move_container{
+    padding:40px 0;
+    clear:both;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.number{
+    font-weight:bold;
+    margin:0 8px;
+    text-decoration:none;
+    color:#777;
+    font-size:15px;
+}
+.number:hover{
+    color:red;
+}
+.page-active{
+    color:red;
+}
+#prevButton, #nextButton, #prevSection, #nextSection{
+    font-size:15px;
+    cursor:pointer;
+    transition: transform 0.3s ease;
+    margin:0 5px;
+    margin-top:3px;
+}
+#prevSection:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#nextSection:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#nextButton:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#prevButton:hover{
+    transform: scale(1.1);
+    color:red;
+}

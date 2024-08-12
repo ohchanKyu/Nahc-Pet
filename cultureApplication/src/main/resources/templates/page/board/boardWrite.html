@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <style>
+        .ck-content {
+            color:#333;
+            font-size: 15px;
+            font-weight:bold;
+            font-family: "Noto Sans KR", sans-serif;
+            min-height:300px;
+        }
+    </style>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/board/boardWrite.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> Pet Q&A <i class="fa-solid fa-chevron-right"></i> Q&A 작성 </p>
+    </div>
+    <div class="sub-header">
+        <h1>Q&A 작성</h1>
+        <p>
+            궁금한 것이나 질문사항들을 Q&A 게시판에 등록해주세요. <br>
+            댓글을 통해 서로 소통도 해보세요!
+        </p>
+        <div class="select-bar">
+            <th:block sec:authorize="isAuthenticated()">
+                <button id="me">내 Q&A</button>
+            </th:block>
+            <button id="all">Q&A 전체보기</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="rule-box">
+            <h4><i class="fa-regular fa-bell"></i> Notice!</h4>
+            <ul class="rule-list">
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 제목은 최대 255자까지 입력가능합니다.</li>
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 본문은 최대 10000자까지 입력가능합니다.</li>
+                <li class="first"><i class="fa-solid fa-chevron-right"></i> 게시물은 내 Q&A > 삭제를 통해 삭제가능합니다.</li>
+            </ul>
+        </div>
+        <form class="post-form" method="post">
+            <label for="title" class="title">Q&A Title</label>
+            <input placeholder="제목을 입력해주세요" type="text" id="title"/>
+            <label for="editor" class="editor">Q&A Content</label>
+            <textarea class="form-control content" id="editor" placeholder="내용을 입력해주세요"></textarea>
+        </form>
+        <div class="button-box">
+            <button class="form-submit">제출</button>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const type = "write";
+        </script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <script src="https://ckeditor.com/apps/ckfinder/3.5.0/ckfinder.js"></script>
+        <script th:src="@{/js/board/boardWrite.js}"></script>
+        <script th:src="@{/js/api/postApi.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

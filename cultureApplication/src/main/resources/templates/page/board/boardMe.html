@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/board/boardMe.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> Pet Q&A <i class="fa-solid fa-chevron-right"></i> My Pet Q&A </p>
+    </div>
+    <div class="sub-header">
+        <h1>My Pet Q&A</h1>
+        <p>
+            나의 Q&A 게시판입니다! <br>
+            전체 선택 혹은 개별 선택으로 삭제가능합니다.
+        </p>
+    </div>
+    <div class="info-container">
+        <div class="text-bar">
+            <span>나의 게시물 <i class="fa-solid fa-chevron-right" style="margin-right: 5px;"></i> <span th:text="${result.totalPost}"></span>건 존재</span>
+        </div>
+        <div class="select-bar">
+            <button class="all-post-button">전체 Q&A</button>
+            <button class="add-post-button">Q&A 작성</button>
+            <button class="delete-post-button">삭제</button>
+        </div>
+    </div>
+    <div class="table-container">
+        <th:block th:if="${result.totalPost == 0}">
+            <p class="no-message">아직 작성하신 Q&A가 없습니다. <br> 등록해보세요!</p>
+        </th:block>
+        <th:block th:if="${result.totalPost > 0}">
+            <table class="table table-bordered table-hover">
+                <thead class="table-head">
+                <tr>
+                    <th style="width:5%;">
+                        <i style="color:white;" class="fa-regular fa-square-check" id="all_check" data-value="0"></i>
+                    </th>
+                    <th scope="col" style="width:5%;">No.</th>
+                    <th scope="col" style="width:50%;">제목</th>
+                    <th scope="col" style="width:10%;">작성자</th>
+                    <th scope="col" style="width:15%;">작성일</th>
+                    <th scope="col" style="width:10%;">조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="result : ${result.posts}">
+                    <td class="text-center">
+                        <i class="fa-regular fa-square-check" id="check-button" th:data-value="${result.post.id}" data-check="0"></i>
+                    </td>
+                    <th scope="row" class="text-center text_number" th:text="${result.post.id}"></th>
+                    <td class="text_title"><a th:href="@{/public/board/{postId}(postId=${result.post.id})}" th:text="${result.post.title}"></a></td>
+                    <td class="text-center author" th:text="${result.author}"></td>
+                    <td class="text-center modifyDate" th:text="${#strings.setSplit(result.post.createdDateTime,'T')[0]}"></td>
+                    <td class="text-center totalCount" th:text="${result.post.totalCount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </th:block>
+    </div>
+    <div class="move_container">
+        <i class="fa-solid fa-angles-left" id="prevSection"></i>
+        <i class="fa-solid fa-chevron-left" id="prevButton"></i>
+        <span class="move_number"></span>
+        <i class="fa-solid fa-chevron-right" id="nextButton"></i>
+        <i class="fa-solid fa-angles-right" id="nextSection"></i>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const currentSection = [[ ${ result.currentSection } ]];
+            const endSection = [[ ${ result.endSection } ]];
+            const posts = [[ ${ result.posts } ]];
+            const currentPage = [[ ${ result.currentPage }]];
+            const totalPage = [[ ${ result.totalPage } ]];
+            const postType = 'me';
+        </script>
+        <script th:src="@{/js/board/board.js}"></script>
+        <script th:src="@{/js/board/boardMe.js}"></script>
+        <script th:src="@{/js/api/postApi.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

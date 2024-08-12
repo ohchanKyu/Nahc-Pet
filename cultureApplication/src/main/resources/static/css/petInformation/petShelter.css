@@ -1,0 +1,335 @@
+.header{
+    width:100%;
+    padding:20px 0 20px 20px;
+    border-bottom:1px solid #333;
+}
+.header p {
+    margin:0;
+    font-size:14px;
+}
+.sub-header{
+    text-align: center;
+    margin:30px 0;
+}
+.sub-header h3 {
+    margin-top:50px;
+    font-weight: bold;
+}
+.sub-header p {
+    font-size:15px;
+    color:#777;
+    margin:30px 0 0 0;
+    opacity: 0.7;
+}
+.customOverlay-info {
+    position: absolute;
+    bottom: 50px;
+    left: -50%;
+    transform: translateX(-50%);
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+    text-align: center;
+    background: #453fb2;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+.customOverlay-info-placeName {
+    margin:10px 0;
+    padding: 0 10px;
+    color: #ffffff;
+}
+.customOverlay-info-address,.customOverlay-info-manage,.customOverlay-info-phoneNumber{
+    margin: 0;
+    font-size: 12px;
+    color: #ffffff;
+    opacity: 0.7;
+    padding: 0 10px;
+    text-align: center;
+    word-break: keep-all;
+}
+.customOverlay-info:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    margin-left: -12px;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
+}
+#map{
+    width:100%;
+    height:500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 8px #3333;
+}
+#map-wrapper{
+    position: relative;
+    display: none;
+    width:1000px;
+    margin:0 auto;
+    padding-bottom: 30px;
+}
+.map-description{
+    text-align: center;
+    font-weight: bold;
+    margin:30px 0;
+    color:#e39900;
+}
+.radius_border{
+    border:1px solid #919191;
+    border-radius:5px;
+}
+.region-container{
+    position:absolute;
+    top:50px;
+    right:60px;
+    width:200px;
+    z-index:1;
+}
+#region{
+    height: 40px;
+}
+.search-box{
+    position: absolute;
+    top:75px;
+    right: 10px;
+    z-index: 1;
+    text-align:center;
+    line-height:2.5;
+    font-weight:bold;
+    background-color:#048d0d;
+    width:40px;
+    height:40px;
+    color:white;
+    cursor:pointer;
+    transition: transform 0.3s ease;
+}
+.search-box:hover{
+    transform: scale(1.1);
+}
+.custom_zoom {
+    position:absolute;
+    top:150px;
+    right:10px;
+    width:36px;
+    height:80px;
+    overflow:hidden;
+    z-index:1;
+    background-color:#f5f5f5;
+}
+.custom_zoom span {
+    line-height: 2.1;
+    display:block;
+    width:40px;
+    height:40px;
+    text-align:center;
+    cursor:pointer;
+}
+.custom_zoom span img {
+    margin-right: 5px;
+    width:15px;
+    height:15px;
+    border:none;
+}
+.custom_zoom span:first-child{
+    border-bottom:1px solid #bfbfbf;
+}
+.card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:50px 0;
+}
+.card_common{
+    width:300px;
+    height:300px;
+    background-color: #453fb2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 8px #3333;
+    margin:0 20px;
+    padding:20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+.card_common:hover{
+    transform: scale(1.1);
+}
+.card_common h4 {
+    text-align: center;
+    color:white;
+    margin:30px 0;
+}
+.card_common p{
+    text-align: center;
+    color:white;
+    opacity: 0.7;
+    font-size:14px;
+    word-break: keep-all;
+}
+.card_common button{
+    width:100%;
+    margin:0 auto;
+    align-self: flex-end;
+    padding: 10px 20px 10px 20px;
+    border:none;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #fff;
+    color: #453fb2;
+}
+.first-modal{
+    --bs-modal-width: 600px;
+}
+.first-title, .second-title, .third-title{
+    text-align: center;
+    font-weight: bold;
+    color:#048d0d;
+    padding:20px 0;
+}
+.second-title{
+    color:#e45735;
+}
+.third-title{
+    color:#453fb2;
+}
+.list-wrapper{
+    display: flex;
+    padding:0 10px;
+    margin:20px 0;
+}
+.list-wrapper2{
+    display: flex;
+    padding:0 10px;
+    margin:20px 0;
+    align-items: center;
+}
+.title {
+    text-align: center;
+    font-size:15px;
+    padding:10px;
+    background-color:#048d0d;
+    color:white;
+    font-weight: bold;
+    border-radius: 8px;
+    width:130px !important;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title2{
+    text-align: center;
+    font-size:15px;
+    padding:10px;
+    background-color:#e45735;
+    color:white;
+    font-weight: bold;
+    border-radius: 8px;
+    width:90px !important;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.title.two{
+    background-color: #453fb2;
+}
+.description{
+    font-size:14px;
+    font-weight: bold;
+    word-break: keep-all;
+    width:400px !important;
+    margin-left:30px;
+    margin-bottom: 0;
+}
+.description span{
+    font-size:13px;
+    color:#333;
+    opacity: 0.8;
+}
+.icon-wrapper{
+    text-align: center;
+}
+.fa-chevron-down{
+    font-size: 24px;
+}
+.produce-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.produce{
+    border-radius: 8px;
+    border: 1px solid #e39900;
+    padding:20px;
+    width:250px;
+    margin:0 20px;
+}
+.produce-wrapper .fa-chevron-right{
+    font-size:24px;
+    color:#e45735;
+}
+.produce-title{
+    font-weight: bold;
+    text-align: center;
+    color:#e39900;
+    font-size:19px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e39900;
+    margin-bottom: 20px;
+}
+.produce-description{
+    font-size:14px;
+    text-align: center;
+    margin-bottom: 0;
+    word-break: keep-all;
+}
+.third-description{
+    color:#453fb2;
+    opacity: 0.8;
+    text-align: center;
+    font-style: italic;
+}
+.watch-list{
+    width:70%;
+    margin:0 auto;
+}
+.watch-list > div {
+    margin:30px 0;
+    padding-bottom: 10px;
+}
+.watch{
+    margin:0 auto;
+    background-color:#1e1b65;
+    border-radius: 8px;
+}
+.watch h5{
+    text-align: center;
+    padding:20px 0;
+    color:#e39900;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.watch p {
+    text-align: center;
+    color:white;
+    margin-bottom:20px;
+}
+.link-wrapper{
+    text-align: center;
+}
+.link-wrapper a {
+    color:#453fb2;
+    text-decoration: none;
+    font-weight: bold;
+}
+.link-wrapper a:hover{
+    color:#e39900;
+}

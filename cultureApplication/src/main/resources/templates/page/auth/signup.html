@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block th:replace="~{common/config :: configFragment}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/auth/signup.css}" >
+</head>
+<body>
+<div class="header">
+    <h1>NaHC Pet Service <i class="fa-solid fa-dog"></i></h1>
+    <p class="description">
+        반려동물 동반 가능한 여러 장소부터 애견 훈련 블로그, 동물 보호센터까지 <br>
+        반려동물과 관련된 여러 정보들을 만나보실 수 있습니다. <br>
+    </p>
+</div>
+<div class="wrapper">
+    <div class="signup-form">
+        <p class="form-description">회원가입</p>
+        <div class="signup-container">
+            <div class="input-container">
+                <label for="name" hidden="hidden" class="form-label name">이름 입력</label>
+                <input id="name"
+                       placeholder="이름을 입력하세요."
+                       class="form-control" type="text">
+                <label for="email" hidden="hidden" class="form-label email">이메일 입력</label>
+                <div class="id-input-container">
+                    <input id="email" placeholder="이메일을 입력하세요." class="form-control" type="text">
+                </div>
+                <label for="password" hidden="hidden" class="form-label password">비밀번호 입력</label>
+                <input id="password" style="margin-bottom: 10px" placeholder="비밀번호를 입력하세요." class="form-control" type="password">
+                <label for="passwordCheck" hidden="hidden" class="form-label passwordCheck">비밀번호 확인</label>
+                <input id="passwordCheck"
+                       placeholder="위와 동일한 비밀번호를 입력하세요."
+                       class="form-control" type="password">
+                <p class="message">영문자,숫자,특수문자를 하나 포함 <br> (8~15)자리로 만들어주세요.</p>
+            </div>
+            <div class="signup-button-container">
+                <button id="signup-button">회원가입</button>
+            </div>
+            <div class="link-container">
+                <a href="/auth/login">로그인</a>
+                <span>|</span>
+                <a href="/auth/findEmail">이메일 찾기</a>
+                <span>|</span>
+                <a href="/auth/findPassword">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/auth/signup.js}"></script>
+<script th:src="@{/js/api/authApi.js}"></script>
+<th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
+</body>
+</html>

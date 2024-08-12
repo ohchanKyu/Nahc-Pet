@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default_layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaHC Pet</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/pet/petHospital.css}" >
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="header">
+        <p> 반려동물과 함께 <i class="fa-solid fa-chevron-right"></i> 식당 및 펜션 </p>
+    </div>
+    <div class='box'>
+        <div class='wave -one'></div>
+        <div class='wave -two'></div>
+        <div class='wave -three'></div>
+        <h1 class='title'>식당 및 펜션</h1>
+        <p>
+            근처에 있는 반려동물 동반 카페,식당 및 펜션 정보를 알려드립니다. <br>
+            장소 검색 또는 현재 위치, 주소 검색을 통해서 서비스를 이용해보세요!
+        </p>
+    </div>
+    <div class="card-container">
+        <div class="card_common search-card">
+            <h4><i class="fa-solid fa-magnifying-glass-plus"></i> 장소 키워드 검색</h4>
+            <p>원하시는 장소명,주차가능 여부, <br> 실내 실외 가능 여부, 지역 등을 검색하여 <br> 해당 장소의 정보를 얻어보세요!</p>
+            <button onclick="searchModalHandler()">장소명으로 검색하기</button>
+        </div>
+        <div class="card_common current-card">
+            <h4><i class="fa-solid fa-location-dot"></i> 현재 위치 검색</h4>
+            <p>
+                현재 위치를 기반으로 식당 및 <br> 펜션에 대한 정보를 알려드립니다. <br>
+                교통정보도 포함되어있으니 확인해보세요!
+            </p>
+            <button onclick="currentPlaceHandler(this)">현재 위치로 검색하기</button>
+        </div>
+        <div class="card_common address-card">
+            <h4><i class="fa-solid fa-magnifying-glass-location"></i> 주소로 검색</h4>
+            <p>
+                입력하신 주소를 기반으로 식당 및 <br> 펜션에 대한 정보를 알려드립니다. <br>
+                교통정보도 포함되어있으니 확인해보세요!
+            </p>
+            <button id="address-button">주소로 검색하기</button>
+        </div>
+    </div>
+    <div id="map-wrapper" class="animation-tag">
+        <h4 class="map-description">
+            # 지도와 함께 검색 장소를 살펴보세요!
+        </h4>
+        <div id="map"></div>
+        <div class="custom_zoom radius_border">
+            <span onclick="zoomIn()">
+                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대">
+            </span>
+            <span onclick="zoomOut()">
+                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소">
+            </span>
+        </div>
+    </div>
+    <div class="result-container"></div>
+    <div class="modal-container"></div>
+    <hr>
+    <div class="recommend-wrapper">
+        <h3>NaHC Recommend</h3>
+        <p class="recommend-desc">
+            NaHC 장소 추천 서비스입니다. <br>
+            사용자의 리뷰 및 즐겨찾기 데이터를 통해 여러 장소를 추천해드립니다. <br>
+            현재 거리 및 전체 리뷰 평점을 통해서도 장소를 추천받을 수 있습니다!
+        </p>
+        <div class="list-wrapper">
+            <h4><i class="fa-solid fa-bookmark" style="margin: 3px 5px 0 0;"></i> 사용자 맞춤형 추천</h4>
+            <div class="user-list"></div>
+            <p class="list-title">
+                <i class="fa-solid fa-bookmark"></i> 현재 거리 및 리뷰 추천
+            </p>
+            <div class="dist-list"></div>
+        </div>
+    </div>
+    <hr>
+    <div class="modal fade" id="recommend-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered recommend-modal">
+            <div class="modal-content">
+                <div class="modal-header traffic-header"></div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="address-modal" tabindex="-1" aria-labelledby="address-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body address-wrap">
+                    <div id="wrap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="review-modal" tabindex="-1" aria-labelledby="address-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center">
+                    <h1 class="modal-title fs-5"></h1>
+                </div>
+                <div class="modal-body">
+                    <div class="review-desc"></div>
+                    <p class="no-message" style="display: none"></p>
+                    <ul class="review-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="image-modal" class="image-modal">
+        <span class="close">&times;</span>
+        <img alt='full-image' class="image-modal-content" id="full-image" src=""/>
+        <p class="sub-text"></p>
+    </div>
+    <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="address-modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered search-modal">
+            <div class="modal-content">
+                <div class="modal-body search-wrap">
+                    <h4><i class="fa-solid fa-magnifying-glass-plus"></i> 장소 키워드 검색</h4>
+                    <p class="search-description">
+                        원하시는 항목을 선택하여 검색버튼을 눌러주세요! <br>
+                        카테고리 선택은 반드시 필수입니다.
+                    </p>
+                    <div class="search-input-container">
+                        <label for="placeName" hidden="hidden"></label>
+                        <input id="placeName" type="text" placeholder="장소명 입력"/>
+                        <label for="category" hidden="hidden"></label>
+                        <select id="category" class="form-select form-select-sm mb-3">
+                            <option selected>카테고리 선택</option>
+                            <option value="카페">카페</option>
+                            <option value="식당">식당</option>
+                            <option value="펜션">펜션</option>
+                        </select>
+                        <label for="region" hidden="hidden"></label>
+                        <select id="region" class="form-select form-select-sm mb-3">
+                            <option selected>지역 선택</option>
+                            <option value="경기도">경기도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="세종특별자치시">세종특별자치시</option>
+                            <option value="전북특별자치도">전북특별자치도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="강원특별자치도">강원특별자치도</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="제주특별자치도">제주특별자치도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="강원도">강원도</option>
+                            <option value="전라북도">전라북도</option>
+                        </select>
+                        <div class="checkbox-container">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="isParking"
+                                >
+                                <label class="form-check-label" for="isParking">주차 가능</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="isInside"
+                                >
+                                <label class="form-check-label" for="isInside">실내 동반 가능</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       role="switch"
+                                       id="isOutside"
+                                >
+                                <label class="form-check-label" for="isOutside">실외 동반 가능</label>
+                            </div>
+                        </div>
+                        <div class="search-button-container">
+                            <button onclick="searchPlaceHandler(this)" class="search-button">
+                                검색하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loading-modal">
+        <div class="loading-modal-container">
+            <div class="loading-modal-box">
+                <h1> NaHC </h1>
+                <p> 데이터를 처리중입니다. <br/>잠시만 기다려주세요. </p>
+                <img th:src="@{/assets/Spinner.gif}" alt="loading"/>
+            </div>
+        </div>
+    </div>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            const type = "hotel";
+        </script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script th:src="@{/js/api/favoriteApi.js}"></script>
+        <script th:src="@{/js/api/placeApi.js}"></script>
+        <script th:src="@{/js/api/kakaoMap.js}"></script>
+        <script th:src="@{/js/api/reviewApi.js}"></script>
+        <script th:src="@{/js/auth/review.js}"></script>
+        <script th:src="@{/js/pet/pet.js}"></script>
+    </th:block>
+</div>
+</body>
+</html>

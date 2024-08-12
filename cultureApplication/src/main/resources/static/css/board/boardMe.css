@@ -1,0 +1,166 @@
+.header{
+    width:100%;
+    padding:20px 0 20px 20px;
+    border-bottom:1px solid #333;
+}
+.header p {
+    margin:0;
+    font-size:14px;
+}
+.sub-header{
+    width:1000px;
+    margin:0 auto;
+}
+.sub-header h1 {
+    font-weight:bold;
+    text-align:center;
+    font-style:italic;
+    margin:30px 0;
+}
+.sub-header p {
+    font-size:15px;
+    color:#777;
+    margin:30px 0 0 0;
+    opacity: 0.7;
+    text-align: center;
+}
+.info-container{
+    width:1000px;
+    padding:50px 0 10px 0;
+    margin:0 auto;
+    display: flex;
+    align-items: flex-end;
+}
+.text-bar{
+   margin-bottom: 10px;
+}
+.text-bar span {
+    font-weight:bold;
+}
+.select-bar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:auto;
+}
+.select-bar button{
+    margin:0 5px;
+}
+.table-container{
+    border-top:1px solid #333;
+    width:1000px;
+    margin:0 auto;
+    padding-top:10px;
+}
+#count{
+    margin-right:0;
+}
+.table {
+    table-layout: fixed;
+    width:1000px !important;
+    border-radius:8px;
+}
+.table-head th {
+    text-align: center;
+    color:#fff;
+    background-color: #73685d;
+}
+.place-tr{
+    cursor: pointer;
+}
+.text_title a{
+    text-decoration: none;
+    color:black;
+    font-size:16px;
+}
+.text_number, td {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    font-size:14px;
+    font-weight: bold;
+}
+.author, .modifyDate, .totalCount, .likeCount{
+    font-size:14px;
+}
+#all_check, #check-button{
+    cursor:pointer;
+    transition: transform 0.3s ease;
+}
+.no-message{
+    color:red;
+    font-weight: bold;
+    text-align: center;
+    margin:50px 0;
+}
+.add-post-button, .delete-post-button, .all-post-button{
+    float:right;
+    font-size:16px;
+    margin-top:10px;
+    padding:6px 18px;
+    font-weight:bold;
+    text-decoration:none;
+    background-color:#453fb2;
+    color:white;
+    border:none;
+    border-radius:5px;
+    transition: transform 0.3s ease;
+}
+.add-post-button:hover{
+    transform: scale(1.1);
+}
+.delete-post-button:hover{
+    transform: scale(1.1);
+}
+.all-post-button:hover{
+    transform: scale(1.1);
+}
+#all_check:hover{
+    transform: scale(1.1);
+}
+#check-button:hover{
+    transform: scale(1.1);
+}
+.move_container{
+    margin-top:30px;
+    clear:both;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.number{
+    font-weight:bold;
+    margin:0 8px;
+    text-decoration:none;
+    color:#777;
+    font-size:15px;
+}
+.number:hover{
+    color:red;
+}
+.page-active{
+    color:red;
+}
+#prevButton, #nextButton, #prevSection, #nextSection{
+    font-size:15px;
+    cursor:pointer;
+    transition: transform 0.3s ease;
+    margin:0 5px;
+    margin-top:3px;
+}
+#prevSection:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#nextSection:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#nextButton:hover{
+    transform: scale(1.1);
+    color:red;
+}
+#prevButton:hover{
+    transform: scale(1.1);
+    color:red;
+}
