@@ -1,34 +1,41 @@
-# Nahc-Pet
-## 2024년 문화 디지털혁신 및 문화데이터 활용 본선 진출 작품
-### 반려동물과 함께하는 융합 플랫폼 서비스
+<h1 align="center">
+ Nahc-Pet
+</h1>
+<h3 align="center">
+ 반려동물과 함께하는 융합 플랫폼 서비스
+</h3>
+<p align="center">
+ 2024년 문화 디지털혁신 및 문화데이터 활용 본선 진출 작품 <br>
+</p>
 
-## 개발 환경
-Front : HTML / CSS / JavaScript
-Back-end : Java / Maria DB / Redis 
-Cloud : CloudType
-Framework : Spring boot
-Framework Main Dependency
+### 개발 환경
+FrontEnd : HTML / CSS / JavaScript <br>
+BackEnd : Java / Maria DB / Redis <br>
+Cloud : CloudType <br>
+Framework : Spring boot <br>
+Framework Main Dependency <br>
 * Jpa
 * Redis
 * Spring Security
 * Thymeleaf
 
-## 외부 데이터 및 API
-* Kakao API
+### 외부 데이터 및 API
+* Kakao API <br>
 Kakao API를 통해 실시간 교통정보 및 관련 블로그 제공
-* Google API
+* Google API <br>
 Google AI의 Gemini API를 통해 AI 채팅 모델 제공
-* 문화 빅데이터 플랫폼
-한국문화정보원 전국 반려동물 동반가능 문화시설 위치 데이터
-활용 내용
-현재 위치 또는 주소를 기반으로 근처에 존재하는 반려동물 동반 가능한 문화시설을 사용자에게 알려주고,
-실시간 교통정보 또한 바로 제공한다. 해당 데이터의 위도, 경도 정보와 현재 위치 또는 주소의 좌표 통해 거리 계산 알고리즘을 적용하여
-장소 데이터를 거리순으로 정렬하여 사용자에게 장소 정보들을 제공한다.
+* 문화 빅데이터 플랫폼 <br>
+데이터명 - 한국문화정보원 전국 반려동물 동반가능 문화시설 위치 데이터 <br>
+활용 내용 <br>
+현재 위치 또는 주소를 기반으로 근처에 존재하는 반려동물 동반 가능한 문화시설을 사용자에게 알려주고, <br>
+실시간 교통정보 또한 바로 제공한다. <br>
+해당 데이터의 위도, 경도 정보와 현재 위치 또는 주소의 좌표 통해 거리 계산 알고리즘을 적용하여 <br>
+장소 데이터를 거리순으로 정렬하여 사용자에게 장소 정보들을 제공한다. <br>
 
 ## 프로젝트 소개
-해당 서비스는 반려동물 동반 가능한 장소를 현재 위치 기반으로 제공하며,
-또한, 전국 동물 보호센터의 위치와 유기 동물 입양 절차 정보를 제공하고, 
-AI 챗봇과 Pet Q&A 서비스를 통해 반려동물 건강 및 관리에 대한 실시간 상담과 커뮤니티 소통 기능을 지원한다.
+해당 서비스는 반려동물 동반 가능한 장소를 현재 위치 기반으로 제공한다. <br>
+또한, 전국 동물 보호센터의 위치와 유기 동물 입양 절차 정보를 제공하고, <br>
+AI 챗봇과 Pet Q&A 서비스를 통해 반려동물 건강 및 관리에 대한 실시간 상담과 커뮤니티 소통 기능을 지원한다. <br>
 
 ## 서비스 기능
 ### 반려동물 동반 가능한 장소 정보 제공
