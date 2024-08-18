@@ -8,6 +8,15 @@
 
 <br>
 
+<blockquote>
+  <p dir="auto">
+     <strong> 2024년 문화 디지털혁신 및 문화데이터 활용 웹 서비스 분야 </strong> <br>
+     <strong> 개발 기간 : 2024.06.25 ~ 2024.07.13 </strong>
+  </p>
+</blockquote>
+
+<br>
+
 ### 프로젝트 소개
 해당 서비스는 반려동물 동반 가능한 장소를 현재 위치 기반으로 제공한다. <br>
 또한, 전국 동물 보호센터의 위치와 유기 동물 입양 절차 정보를 제공하고, <br>
@@ -146,6 +155,221 @@ AI 챗봇과 Pet Q&A 서비스를 통해 반려동물 건강 및 관리에 대�
          <img width="400px" src="https://github.com/user-attachments/assets/12a82c41-4856-458f-bb3e-e0eb60f3283d"/>
        </p>
 
+<br> 
 
-
+### 아키텍쳐
+#### 디렉터리 구조
+```
+├── README.md
+📦cultureApplication
+ ┣ 📂.idea
+ ┃ ┣ 📂inspectionProfiles
+ ┃ ┃ ┗ 📜Project_Default.xml
+ ┃ ┣ 📜.gitignore
+ ┣ 📂.mvn
+ ┃ ┗ 📂wrapper
+ ┃ ┃ ┗ 📜maven-wrapper.properties
+ ┣ 📂src
+ ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂java
+ ┃ ┃ ┃ ┗ 📂kr
+ ┃ ┃ ┃ ┃ ┗ 📂ac
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂dankook
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂cultureApplication
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberDetail.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRole.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜MemberUtil.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GeminiRestTemplateConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RedisConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜SecurityConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WebMvcConfiguration.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PrivateBoardController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PrivateController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PrivatePetController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PublicBoardController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PublicController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChatRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CoordinateRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KeywordRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LocationRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PasswordChangeRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜VerifyCodeRequest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AllPageResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AroundPlaceResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BlogResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChatResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CoordinateResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DistancePlaceResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ImageResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ItemBasedRecommendResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜KakaoPlaceResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MailResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PageSectionResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendPlaceResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RouteResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜WeightByDistResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜BaseEntity.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Comment.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Member.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PetShelter.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜Place.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceFavorite.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceReview.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceReviewImage.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜Post.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ApiJsonParsingException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜DuplicatedEmailException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ErrorResponse.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GlobalExceptionHandler.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MailException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜NoEntityException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostNotFoundException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜UserNotFoundException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂interceptor
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜PostInterceptor.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FavoriteRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PetShelterRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceReviewImageRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReviewRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂restController
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FavoriteRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GeminiRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LocationRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PetRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReviewRestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜AuthService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ClusteringService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CommentService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CustomUserDetailService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FavoriteService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FileService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GeminiService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜LocationService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MailService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜MemberService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceReviewService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PlaceService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜PostService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜RecommendService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜RedisService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜CultureApplication.java
+ ┃ ┃ ┣ 📂resources
+ ┃ ┃ ┃ ┣ 📂static
+ ┃ ┃ ┃ ┃ ┣ 📂assets
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜animated-text-fill.png
+                  ... 
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜tour.png
+ ┃ ┃ ┃ ┃ ┣ 📂css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findEmail.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findPassword.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜login.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜signup.css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂board
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜board.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardDetail.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardEdit.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardMe.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜boardWrite.css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂pet
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜petHospital.css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂petInformation
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petCafe.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petEducation.css
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜petShelter.css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜config.css
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜main.css
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜myInformation.css
+ ┃ ┃ ┃ ┃ ┗ 📂js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜authApi.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜favoriteApi.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜geminiApi.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜kakaoMap.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜placeApi.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜postApi.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜reviewApi.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findEmail.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findPassword.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜login.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜review.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜signup.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂board
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜board.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardDetail.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardMe.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜boardWrite.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂pet
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜pet.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂petInformation
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petAddition.js
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜petShelter.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜config.js
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜main.js
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜myInformation.js
+ ┃ ┃ ┃ ┣ 📂templates
+ ┃ ┃ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜config.html
+ ┃ ┃ ┃ ┃ ┣ 📂fragments
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜footer.html
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜header.html
+ ┃ ┃ ┃ ┃ ┣ 📂layouts
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜default_layout.html
+ ┃ ┃ ┃ ┃ ┗ 📂page
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findEmail.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜findPassword.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜login.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜signup.html
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂board
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜board.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardDetail.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardEdit.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜boardMe.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜boardWrite.html
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂pet
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petCare.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petHospital.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petHotel.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜petTour.html
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂petInformation
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petCafe.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜petEducation.html
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜petShelter.html
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜main.html
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜myInformation.html
+ ┃ ┃ ┃ ┗ 📜application.properties
+ ┃ ┃ ┗ 📂webapp
+ ┃ ┃ ┃ ┗ 📂upload
+ ┃ ┃ ┃ ┃ ┣ 📂postImage
+ ┃ ┃ ┃ ┃ ┣ 📂reviewImage
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜2f8fb25e-d51b-49c0-a1b5-bc482d5d9090.png
+                      ...
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜f00b66d0-470a-4a54-802c-e759f90fe7a8.png
+ ┗ 📜pom.xml
+```
 
