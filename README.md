@@ -10,7 +10,7 @@
 
 <blockquote>
   <p dir="auto">
-     <strong> 2024년 문화 디지털혁신 및 문화데이터 활용 웹 서비스 분야 </strong> <br>
+     <strong> 2024년 문화 디지털혁신 및 문화데이터 활용 본선 진출 작품 </strong> <br>
      <strong> 개발 기간 : 2024.06.25 ~ 2024.07.13 </strong>
   </p>
 </blockquote>
