@@ -82,8 +82,8 @@ AI 챗봇과 Pet Q&A 서비스를 통해 반려동물 건강 및 관리에 대�
 
      * 장소 상세 정보 및 실시간 교통정보 UI
        <p align="left">
-         <img src="https://github.com/user-attachments/assets/c91ad5ec-8add-40a3-be83-055f9988dc61" height="300px"/>
-         <img src="https://github.com/user-attachments/assets/b391bcea-32a5-4979-bde0-432f293c4844" height="300px"/>
+         <img width="70%" src="https://github.com/user-attachments/assets/c91ad5ec-8add-40a3-be83-055f9988dc61" height="300px"/>
+         <img width="30%"src="https://github.com/user-attachments/assets/b391bcea-32a5-4979-bde0-432f293c4844" height="300px"/>
        </p>
 <br> 
 
