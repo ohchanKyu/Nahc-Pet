@@ -36,6 +36,7 @@ AI 챗봇과 Pet Q&A 서비스를 통해 반려동물 건강 및 관리에 대�
 - [x] Redis
 - [x] Spring Security
 - [x] Thymeleaf
+- [x] Maven
 <br>
 
 ### 데이터 및 API
